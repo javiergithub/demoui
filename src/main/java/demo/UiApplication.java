@@ -3,6 +3,7 @@ package demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpSession;
 @SpringBootApplication
 @RestController
 @EnableRedisHttpSession
+@EnableZuulProxy
 public class UiApplication {
 
 	@RequestMapping("/token")
@@ -52,15 +54,15 @@ public class UiApplication {
 					.authorizeRequests()
 					.antMatchers("/index.html", "/home.html", "/login.html",
 							"/").permitAll().anyRequest().authenticated().and()
-					.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
-					.csrf().csrfTokenRepository(csrfTokenRepository()).and()
+//					.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
+//					.csrf().csrfTokenRepository(csrfTokenRepository()).and()
 					.logout();
 		}
 
-		private CsrfTokenRepository csrfTokenRepository() {
+/*		private CsrfTokenRepository csrfTokenRepository() {
 			HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
 			repository.setHeaderName("X-XSRF-TOKEN");
 			return repository;
-		}
+		}*/
 	}
 }
