@@ -16,12 +16,8 @@ angular.module('hello', [ 'ngRoute' ])
 	$http.get('resource/').success(function(data) {
 		$scope.greeting = data;
 	})
-  });
-
- 
- .controller('navigation',
-  function($rootScope, $scope, $http, $location) {
-
+  })
+ .controller('navigation',  function($rootScope, $scope, $http, $location) {
   var authenticate = function(credentials, callback) {
 
     var headers = credentials ? {authorization : "Basic "
@@ -40,7 +36,7 @@ angular.module('hello', [ 'ngRoute' ])
       callback && callback();
     });
 
-  }
+  };
 
   authenticate();
   $scope.credentials = {};
@@ -51,7 +47,7 @@ angular.module('hello', [ 'ngRoute' ])
 	}).error(function(data) {
 	  $rootScope.authenticated = false;
 	});
-  }
+  };
   
   $scope.login = function() {
       authenticate($scope.credentials, function() {
